@@ -910,16 +910,6 @@
               <widget class="QComboBox" name="report_box">
                <item>
                 <property name="text">
-                 <string>SQLite</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>PostgreSQL</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
                  <string>Oracle</string>
                 </property>
                </item>
@@ -931,6 +921,11 @@
                <item>
                 <property name="text">
                  <string>AzureSQL</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>PostgreSQL</string>
                 </property>
                </item>
                <item>
@@ -950,12 +945,12 @@
                </item>
                <item>
                 <property name="text">
-                 <string>IBM Informix</string>
+                 <string>Firebird</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>Firebird</string>
+                 <string>SQLite</string>
                 </property>
                </item>
                <item>
@@ -976,6 +971,11 @@
                <item>
                 <property name="text">
                  <string>Cassandra</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>CosmosDB</string>
                 </property>
                </item>
               </widget>

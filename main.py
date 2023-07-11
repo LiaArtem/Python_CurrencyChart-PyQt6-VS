@@ -7,7 +7,7 @@ import datetime as dt
 from dateutil.relativedelta import relativedelta
 
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox, QWidget
+from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox
 from MainWindow_ui import Ui_MainWindow
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -21,6 +21,9 @@ import db_mysql as db_mysql
 import db_mariadb as db_mariadb
 import db_oracle as db_oracle
 import db_mssql as db_mssql
+import db_ibmdb2 as db_ibmdb2
+import db_firebird as db_firebird
+import db_cassandra as db_cassandra
 
 
 class Error_MessageBox_Window(QMessageBox):
@@ -138,6 +141,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         is_enable = self.data_set_find[0]
         if is_enable:
             db_mssql.add_db(self.data_db, curr_code, self.data_set_find, type_db)
+        #############
+        # ibmdb2
+        type_db = "IBM DB2"
+        self.find_settings(type_db)
+        is_enable = self.data_set_find[0]
+        if is_enable:
+            db_ibmdb2.add_db(self.data_db, curr_code, self.data_set_find, type_db)
+        #############
+        # firebird
+        type_db = "Firebird"
+        self.find_settings(type_db)
+        is_enable = self.data_set_find[0]
+        if is_enable:
+            db_firebird.add_db(self.data_db, curr_code, self.data_set_find, type_db)
+        #############
+        # cassandra
+        type_db = "Cassandra"
+        self.find_settings(type_db)
+        is_enable = self.data_set_find[0]
+        if is_enable:
+            db_cassandra.add_db(self.data_db, curr_code, self.data_set_find, type_db)
 
 
     # read settings
@@ -169,7 +193,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def get_json_key_present(self, json, key, key2):
         try:
             return json[key][key2]
-        except KeyError:
+        except KeyError as er:
+            #print(er)
             return ""
     
     # calc data
@@ -357,6 +382,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self_report = db_mssql.load_data_report(self.data_set_find, type_db)
                 case "AzureSQL":
                     self_report = db_mssql.load_data_report(self.data_set_find, type_db)
+                case "IBM DB2":
+                    self_report = db_ibmdb2.load_data_report(self.data_set_find, type_db)
+                case "Firebird":
+                    self_report = db_firebird.load_data_report(self.data_set_find, type_db)
+                case "Cassandra":
+                    self_report = db_cassandra.load_data_report(self.data_set_find, type_db)
 
                 case _:
                     pass
@@ -366,12 +397,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             else:
                 Error_MessageBox_Window("Формирование отчета для базы данных " + type_db + " невозможно, ошибка получения данных", is_exit=False).show()              
     
-    #        
-    #        "IBM DB2"
-    #        "IBM Informix"
-    #        "Firebird"
     #        "MongoDB"
-    #        "Cassandra"
+    #        "CosmosDB"
         else:
             Error_MessageBox_Window("Формирование отчета для базы данных " + type_db + " выключено", is_exit=False).show()  
 

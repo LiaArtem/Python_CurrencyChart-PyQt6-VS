@@ -1,6 +1,6 @@
 {
     "ConnectionSQLite": {
-         "IsEnable": false
+         "IsEnable": true
          },
     "ConnectionPostgreSQL": {
          "DBHost": "localhost",
@@ -77,7 +77,7 @@
          "Trusted_Connection": false,
          "DriverPython": "pyodbc",
          "Encrypt": "no",
-         "IsEnable": true
+         "IsEnable": false
          },
     "ConnectionAzureSQL": {
          "DBHost": "dbserver-test-lia.database.windows.net",
@@ -92,5 +92,35 @@
          "DriverPython": "pymssql",
          "Encrypt": "yes",
          "IsEnable": false
+         },
+    "ConnectionIBM DB2": {
+         "DBHost": "localhost",
+         "DBPort": 50000,
+         "DBName": "SAMPLE",
+         "DBUser": "DB2INST1",
+         "DBPassword": "!Aa112233",
+         "DBSchema": "test_schemas",
+         "DBInsertProcedure": "INSERT_KURS",
+         "DBSelectView": "CURS_REPORT",
+         "IsEnable": false
+         },
+    "ConnectionFirebird": {
+         "DBHost": "localhost",
+         "DBPort": 3050,
+         "DBName": "/firebird/data/testdb.fdb",
+         "DBUser": "SYSDBA",
+         "DBPassword": "!Aa112233",
+         "DBInsertProcedure": "INSERT_KURS",
+         "DBSelectView": "CURS_REPORT",
+         "IsEnable": false
+         },
+    "ConnectionCassandra": {
+         "DBHost": "localhost",
+         "DBPort": 9042,
+         "DBName": "testdb",
+         "DBUser": "cassandra",
+         "DBPassword": "!Aa112233",
+         "DBSelectView": "curs",
+         "IsEnable": true
          }
 }
