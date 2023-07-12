@@ -121,6 +121,15 @@
          "DBUser": "cassandra",
          "DBPassword": "!Aa112233",
          "DBSelectView": "curs",
-         "IsEnable": true
+         "IsEnable": false
+         },
+    "ConnectionMongoDB": {
+         "DBHost": "localhost",
+         "DBPort": 27017,
+         "DBName": "testdb",
+         "DBUser": "root",
+         "DBPassword": "!Aa112233",
+         "DBSelectView": "Curs",
+         "IsEnable": false
          }
 }

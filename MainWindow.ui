@@ -973,11 +973,6 @@
                  <string>Cassandra</string>
                 </property>
                </item>
-               <item>
-                <property name="text">
-                 <string>CosmosDB</string>
-                </property>
-               </item>
               </widget>
              </item>
             </layout>

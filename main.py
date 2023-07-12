@@ -23,6 +23,7 @@ import db_oracle as db_oracle
 import db_mssql as db_mssql
 import db_ibmdb2 as db_ibmdb2
 import db_firebird as db_firebird
+import db_mongodb as db_mongodb
 import db_cassandra as db_cassandra
 
 
@@ -155,6 +156,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         is_enable = self.data_set_find[0]
         if is_enable:
             db_firebird.add_db(self.data_db, curr_code, self.data_set_find, type_db)
+        #############
+        # mongodb
+        type_db = "MongoDB"
+        self.find_settings(type_db)
+        is_enable = self.data_set_find[0]
+        if is_enable:
+            db_mongodb.add_db(self.data_db, curr_code, self.data_set_find, type_db)
         #############
         # cassandra
         type_db = "Cassandra"
@@ -386,19 +394,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self_report = db_ibmdb2.load_data_report(self.data_set_find, type_db)
                 case "Firebird":
                     self_report = db_firebird.load_data_report(self.data_set_find, type_db)
+                case "MongoDB":
+                    self_report = db_mongodb.load_data_report(self.data_set_find, type_db)
                 case "Cassandra":
                     self_report = db_cassandra.load_data_report(self.data_set_find, type_db)
-
                 case _:
                     pass
 
             if not self_report == []:
                 generate_report(self_report, type_db)    
             else:
-                Error_MessageBox_Window("Формирование отчета для базы данных " + type_db + " невозможно, ошибка получения данных", is_exit=False).show()              
-    
-    #        "MongoDB"
-    #        "CosmosDB"
+                Error_MessageBox_Window("Формирование отчета для базы данных " + type_db + " невозможно, ошибка получения данных", is_exit=False).show()                          
         else:
             Error_MessageBox_Window("Формирование отчета для базы данных " + type_db + " выключено", is_exit=False).show()  
 

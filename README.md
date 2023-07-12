@@ -1,6 +1,6 @@
 # Python_CurrencyChart-PyQt6-VS
 Python PyQt6 project VS Code - generating report from DB
-(Oracle, MS SQL, Azure SQL, PostgreSQL, MySQL, MariaDB, IBM DB2, Firebird, SQLite, Amazon Aurora MySQL, Amazon Aurora PostgreSQL, Cassandra).
+(Oracle, MS SQL, Azure SQL, PostgreSQL, MySQL, MariaDB, IBM DB2, Firebird, SQLite, Amazon Aurora MySQL, Amazon Aurora PostgreSQL, MongoDB, Cassandra).
 Creation of schedules of NBU exchange rates by year to monitor change trends.
 
 IDE - Visual Studio Code
@@ -26,7 +26,9 @@ IDE - Visual Studio Code
 -> pip install pymssql (MSSQL)
 -> pip install ibm_db (IBM DB2)
 -> pip install fdb (Firebird) + для Windows установить Firebird Client Library (https://firebirdsql.org/en/firebird-4-0/)
+-> pip install pymongo (MongoDB)
 -> pip install cassandra-driver (Cassandra)
+
 
 3) Qt Designer
 Запускаємо -> pyqt6-tools designer або окремо встановлюємо
