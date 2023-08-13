@@ -408,10 +408,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             Error_MessageBox_Window("Формирование отчета для базы данных " + type_db + " выключено", is_exit=False).show()  
 
+    def center(self):
+        qr = self.frameGeometry()
+        cp = self.screen().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
 # primary block code
 app = QApplication(sys.argv)
 window = MainWindow()
 window.setWindowIcon(QIcon("icon.ico"))
+window.center()
 window.show()
 sys.exit(app.exec())
