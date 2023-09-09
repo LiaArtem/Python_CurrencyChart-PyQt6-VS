@@ -9,6 +9,7 @@ IDE - Visual Studio Code
 -> Python
 -> Pylance
 -> Qt for Python
+-> Ruff
 
 У командному рядку терміналу CMD
 2) Додаємо бібліотеки
@@ -42,11 +43,8 @@ IDE - Visual Studio Code
 1) Ставимо pyinstaller
 -> pip install pyinstaller
 
-2) Build один EXE файл без консолі зі своєю іконкою (збірка буде у папці \dist\)
--> cd ......
--> pyinstaller -F -w -i "...\CurrencyChart\icon.ico" "...\CurrencyChart\main.py"
-
-Перед кожною збіркою відаляємо \dist\ та \build\ та main.spec
+2) Запускаємо файл .\CurrencyChart_create_EXE_file.bat для автоматичної збірки exe файла
+Сформований файл буде розташований у каталозі \dist\
 
 ---------------------------------------------------------------------------------
 Завантаження первинних курсів

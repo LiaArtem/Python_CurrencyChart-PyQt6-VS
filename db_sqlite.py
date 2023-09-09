@@ -20,7 +20,9 @@ def add_db(data_db = [], curr_code = '', type_db = ''):
                                 FORC INTEGER NOT NULL CHECK(FORC > 0)
                                 )
                         """)
-                cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS UK_CURS ON CURS (CURS_DATE, CURR_CODE)")
+                cursor.execute(
+                     "CREATE UNIQUE INDEX IF NOT EXISTS " + 
+                     "UK_CURS ON CURS (CURS_DATE, CURR_CODE)")
                 # create view
                 cursor.execute("""
                         CREATE VIEW IF NOT EXISTS CURS_AVG_YEAR
@@ -42,7 +44,9 @@ def add_db(data_db = [], curr_code = '', type_db = ''):
                                 k.CURR_CODE,
                                 (k.RATE/a.AVG_RATE)*100 as AVG_RATE
                         FROM CURS k
-                        INNER JOIN CURS_AVG_YEAR a ON a.PART_DATE = SUBSTR(k.CURS_DATE, 1, 4) AND a.CURR_CODE = k.CURR_CODE
+                        INNER JOIN CURS_AVG_YEAR a ON 
+                               a.PART_DATE = SUBSTR(k.CURS_DATE, 1, 4) AND 
+                               a.CURR_CODE = k.CURR_CODE
                         ) f
                         GROUP BY f.PART_DATE, f.CURR_CODE
                         """)
@@ -55,14 +59,19 @@ def add_db(data_db = [], curr_code = '', type_db = ''):
                                 k.RATE,
                                 a.AVG_RATE as AVG_RATE
                         FROM CURS k
-                        INNER JOIN CURS_AVG a ON a.PART_DATE = SUBSTR(k.CURS_DATE, 6, 5) AND a.CURR_CODE = k.CURR_CODE
-                        WHERE SUBSTR(k.CURS_DATE, 1, 4) IN (SELECT SUBSTR(MAX(date(kk.CURS_DATE)),1,4) FROM CURS kk)
+                        INNER JOIN CURS_AVG a ON a.PART_DATE = SUBSTR(k.CURS_DATE, 6, 5)
+                                AND a.CURR_CODE = k.CURR_CODE
+                        WHERE SUBSTR(k.CURS_DATE, 1, 4) IN 
+                               (SELECT SUBSTR(MAX(date(kk.CURS_DATE)),1,4) FROM CURS kk)
                         ORDER BY 1""")
                 
                 # insert data
                 for mas in data_db:
-                        params = (mas[0].strftime("%Y-%m-%d"), curr_code, mas[1], 1)                        
-                        cursor.execute("INSERT OR IGNORE INTO CURS(curs_date, curr_code, rate, forc) VALUES(?, ?, ?, ?)", params)        
+                        params = (mas[0].strftime("%Y-%m-%d"), curr_code, mas[1], 1)
+                        cursor.execute(
+                             "INSERT OR IGNORE INTO CURS" + 
+                             "(curs_date, curr_code, rate, forc) " + 
+                             "VALUES(?, ?, ?, ?)", params)        
                 con.commit()
     except Exception as err:
         print(type_db + ': ' + re.sub("^\s+|\n|\r|\s+$", '', str(err)))

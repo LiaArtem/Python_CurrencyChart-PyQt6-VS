@@ -30,7 +30,8 @@ import db_cassandra as db_cassandra
 class Error_MessageBox_Window(QMessageBox):
     def __init__(self, text_error, is_exit=True, parent=None):        
         super(Error_MessageBox_Window, self).__init__(parent)
-        dialog = QMessageBox.critical(self, "Error", text_error, QMessageBox.StandardButton.Ok)
+        dialog = QMessageBox.critical(self, "Error", text_error, 
+                                      QMessageBox.StandardButton.Ok)
         if dialog == QMessageBox.StandardButton.Ok and is_exit:
             sys.exit()        
 
@@ -175,7 +176,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # read settings
     def read_settings(self):
             if not os.path.isfile("Settings.json"):
-                Error_MessageBox_Window(text_error="File 'Settings.json' not found").show()                
+                Error_MessageBox_Window(
+                    text_error="File 'Settings.json' not found").show()
             # Opening JSON file
             f = open(file="Settings.json", mode="r", encoding="utf8")
             self.data_settings = json.loads(f.read())   
@@ -184,25 +186,39 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # find settings
     def find_settings(self, type_d = ""):
-            self.data_set_find = (self.get_json_key_present(self.data_settings, "Connection" + type_d, "IsEnable"),           # 0
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "DBHost"),             # 1
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "DBPort"),             # 2
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "DBName"),             # 3
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "DBUser"),             # 4
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "DBPassword"),         # 5
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "DBSchema"),           # 6
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "DBInsertProcedure"),  # 7         
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "DBSelectView"),       # 8
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "Trusted_Connection"), # 9                                  
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "DriverPython"),       # 10
-                                  self.get_json_key_present(self.data_settings, "Connection" + type_d, "Encrypt"),            # 11
-                                  )  
+            self.data_set_find = \
+            (self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "IsEnable"),           # 0
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "DBHost"),             # 1
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "DBPort"),             # 2
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "DBName"),             # 3
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "DBUser"),             # 4
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "DBPassword"),         # 5
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "DBSchema"),           # 6
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "DBInsertProcedure"),  # 7         
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "DBSelectView"),       # 8
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "Trusted_Connection"), # 9
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "DriverPython"),       # 10
+             self.get_json_key_present(self.data_settings, "Connection" 
+                                       + type_d, "Encrypt"),            # 11
+            )  
     # check exists json key
     def get_json_key_present(self, json, key, key2):
         try:
             return json[key][key2]
-        except KeyError as er:
-            #print(er)
+        except KeyError:  
+            # as er:
+            # print(er)
             return ""
     
     # calc data
@@ -215,12 +231,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         date_min = dt.datetime.today()
         date_max = dt.datetime.today()
         if self.check_day.isChecked():
-            date_now = dt.datetime.strptime(self.day_box.currentText() + dt.datetime.today().strftime(".%m.%Y"), '%d.%m.%Y').date()
+            date_now = dt.datetime.strptime(self.day_box.currentText() 
+                            + dt.datetime.today().strftime(".%m.%Y"), '%d.%m.%Y').date()
             date_min = date_now + dt.timedelta(days=int(self.minus_day.value()*-1))
             date_max = date_now + dt.timedelta(days=int(self.plus_day.value()))
 
         if self.check_month.isChecked():
-            date_now = dt.datetime.strptime(dt.datetime.today().strftime("%d.") + self.month_box.currentText()[:2] + dt.datetime.today().strftime(".%Y"), '%d.%m.%Y').date()
+            date_now = dt.datetime.strptime(dt.datetime.today().strftime("%d.")
+                            + self.month_box.currentText()[:2] 
+                            + dt.datetime.today().strftime(".%Y"), '%d.%m.%Y').date()
             date_min = date_now + relativedelta(months=int(self.minus_month.value()*-1))
             date_max = date_now + relativedelta(months=int(self.plus_month.value()))
 
@@ -244,8 +263,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 is_file_settings_ukr = False
             if not os.path.isfile(file_settings_eng):
                 is_file_settings_eng = False               
-            if is_file_settings_ukr == False and is_file_settings_eng == False :
-                Error_MessageBox_Window(text_error="File 'Офіційний курс гривні щодо іноземних валют.json or Official hrivnya exchange rates.json' not found").show()
+            if not is_file_settings_ukr and not is_file_settings_eng:
+                Error_MessageBox_Window(
+                    text_error="File 'Офіційний курс гривні щодо іноземних валют.json"+ 
+                    " or Official hrivnya exchange rates.json' not found").show()
 
             # Opening JSON file
             if is_file_settings_eng: 
@@ -264,17 +285,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             f = open(file=file_name, mode="r", encoding="utf8")
             data = json.loads(f.read())
             # calc
-            for year_n in range(self.data_year, self.data_year + int(self.minus_year.value()) + 1, 1):
+            for year_n in range(self.data_year, self.data_year + 
+                                int(self.minus_year.value()) + 1, 1):
                 data_x = []                
                 data_y = []
                 for data_json in data:
-                    if dt.datetime.strptime(date_min.strftime("%d.%m.") + str(year_n + corr_year_min), '%d.%m.%Y').date() \
-                        <= dt.datetime.strptime(data_json[date_code], '%d.%m.%Y').date() \
-                        <= dt.datetime.strptime(date_max.strftime("%d.%m.") + str(year_n + corr_year_max), '%d.%m.%Y').date() \
-                            and data_json[currency_code] == self.curr_box.currentText()[:3]:
+                    if dt.datetime.strptime(date_min.strftime("%d.%m.") 
+                                    + str(year_n + corr_year_min), '%d.%m.%Y').date() \
+                        <= dt.datetime.strptime(data_json[date_code], 
+                                                '%d.%m.%Y').date() \
+                        <= dt.datetime.strptime(date_max.strftime("%d.%m.") 
+                                    + str(year_n + corr_year_max), '%d.%m.%Y').date() \
+                            and data_json[currency_code] == \
+                                    self.curr_box.currentText()[:3]:
                         data_x.append(data_json[date_code][:5])                        
                         data_y.append(data_json[rate_code]/data_json[forc_code])
-                        self.data_db.append((dt.datetime.strptime(data_json[date_code],'%d.%m.%Y').date(), data_json[rate_code]/data_json[forc_code]))
+                        self.data_db.append((dt.datetime.strptime(data_json[date_code],
+                                                                  '%d.%m.%Y').date(), 
+                                                                  data_json[rate_code]/data_json[forc_code]))
                 self.xdata.append(data_x)                
                 self.ydata.append(data_y)
 
@@ -303,7 +331,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.canvas.axes.cla()  # Clear the canvas.
         for num, mas in enumerate(self.ydata):                        
             if len(mas) > 0:
-                self.canvas.axes.plot(self.xdata[num], mas, label=self.data_year)                
+                self.canvas.axes.plot(self.xdata[num], mas, label=self.data_year)
                 self.canvas.axes.grid(linestyle = 'dashed')                
                 if self.check_dot.isChecked():
                     for a,b in zip(self.xdata[num], mas): # подписи значений
@@ -324,17 +352,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         m_month = self.month_box.currentIndex() + 1
         m_year = int (self.year_box.currentText())
         if m_month in (4,6,9,11) and m_day > 30:
-            Error_MessageBox_Window("Для указанного месяца указана некорректный день", is_exit=False).show()            
+            Error_MessageBox_Window(
+                "Для указанного месяца указана некорректный день", 
+                is_exit=False).show()            
             self.is_check_day_month_year = False
         
         if m_month == 2:
             if calendar.isleap(m_year):
                 if m_day > 29:
-                    Error_MessageBox_Window("Для указанного месяца указана некорректный день", is_exit=False).show()
+                    Error_MessageBox_Window(
+                        "Для указанного месяца указана некорректный день", 
+                        is_exit=False).show()
                     self.is_check_day_month_year = False
             else:
                 if m_day > 28:
-                    Error_MessageBox_Window("Для указанного месяца указана некорректный день", is_exit=False).show()                
+                    Error_MessageBox_Window(
+                        "Для указанного месяца указана некорректный день", 
+                        is_exit=False).show()                
                     self.is_check_day_month_year = False
 
 
@@ -375,38 +409,54 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 case "SQLite":
                     self_report = db_sqlite.load_data_report(type_db)
                 case "PostgreSQL":
-                    self_report = db_postgresql.load_data_report(self.data_set_find, type_db)
+                    self_report = db_postgresql.load_data_report(
+                        self.data_set_find, type_db)
                 case "AuroraPostgreSQL":
-                    self_report = db_postgresql.load_data_report(self.data_set_find, type_db)
+                    self_report = db_postgresql.load_data_report(
+                        self.data_set_find, type_db)
                 case "MySQL":
-                    self_report = db_mysql.load_data_report(self.data_set_find, type_db)
+                    self_report = db_mysql.load_data_report(
+                        self.data_set_find, type_db)
                 case "AuroraMySQL":
-                    self_report = db_mysql.load_data_report(self.data_set_find, type_db)
+                    self_report = db_mysql.load_data_report(
+                        self.data_set_find, type_db)
                 case "MariaDB":
-                    self_report = db_mariadb.load_data_report(self.data_set_find, type_db)
+                    self_report = db_mariadb.load_data_report(
+                        self.data_set_find, type_db)
                 case "Oracle":
-                    self_report = db_oracle.load_data_report(self.data_set_find, type_db)
+                    self_report = db_oracle.load_data_report(
+                        self.data_set_find, type_db)
                 case "MSSQL":
-                    self_report = db_mssql.load_data_report(self.data_set_find, type_db)
+                    self_report = db_mssql.load_data_report(
+                        self.data_set_find, type_db)
                 case "AzureSQL":
-                    self_report = db_mssql.load_data_report(self.data_set_find, type_db)
+                    self_report = db_mssql.load_data_report(
+                        self.data_set_find, type_db)
                 case "IBM DB2":
-                    self_report = db_ibmdb2.load_data_report(self.data_set_find, type_db)
+                    self_report = db_ibmdb2.load_data_report(
+                        self.data_set_find, type_db)
                 case "Firebird":
-                    self_report = db_firebird.load_data_report(self.data_set_find, type_db)
+                    self_report = db_firebird.load_data_report(
+                        self.data_set_find, type_db)
                 case "MongoDB":
-                    self_report = db_mongodb.load_data_report(self.data_set_find, type_db)
+                    self_report = db_mongodb.load_data_report(
+                        self.data_set_find, type_db)
                 case "Cassandra":
-                    self_report = db_cassandra.load_data_report(self.data_set_find, type_db)
+                    self_report = db_cassandra.load_data_report(
+                        self.data_set_find, type_db)
                 case _:
                     pass
 
             if not self_report == []:
                 generate_report(self_report, type_db)    
             else:
-                Error_MessageBox_Window("Формирование отчета для базы данных " + type_db + " невозможно, ошибка получения данных", is_exit=False).show()                          
+                Error_MessageBox_Window(
+                    "Формирование отчета для базы данных " 
+                    + type_db + " невозможно, ошибка получения данных", 
+                    is_exit=False).show()                          
         else:
-            Error_MessageBox_Window("Формирование отчета для базы данных " + type_db + " выключено", is_exit=False).show()  
+            Error_MessageBox_Window("Формирование отчета для базы данных " 
+                                    + type_db + " выключено", is_exit=False).show()  
 
     def center(self):
         qr = self.frameGeometry()

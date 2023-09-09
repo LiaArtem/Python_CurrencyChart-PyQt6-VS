@@ -26,7 +26,8 @@ class generate_report:
         
         style = styles["Heading1"]
         canv = Canvas(report, pagesize=A4)
-        header = Paragraph("<bold><font size=23>Дата кращої покупки (" + type_db + ")</font></bold>", style)                
+        header = Paragraph("<bold><font size=23>Дата кращої покупки (" 
+                           + type_db + ")</font></bold>", style)                
 
         t = Table(data_db)
         t.setStyle(TableStyle([('FONT', (0, 0), (-1, 0), 'DejaVuSerif', 16),

@@ -1,2 +1,5 @@
-"C:\Users\artem\AppData\Local\Programs\Python\Python311\python.exe" "D:\Прочие\Project\Project Python\CurrencyChart\main.py"
+@ECHO OFF
+set PYTHONPATH="c:\Users\artem\AppData\Local\Programs\Python\Python311"
+
+"%PYTHONPATH%\python.exe" main.py
 pause

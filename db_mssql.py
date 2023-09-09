@@ -5,14 +5,17 @@ import pymssql as dr2
 # get connection
 def get_con(data_set_find = ()):  
     if data_set_find[10].lower() == "pyodbc":        
-        if data_set_find[9] == True:
-            con = dr.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=" + data_set_find[1] + "," + str(data_set_find[2]) + 
+        if data_set_find[9]:
+            con = dr.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=" + 
+                             data_set_find[1] + "," + str(data_set_find[2]) + 
                             ";DATABASE=" + data_set_find[3] + 
                             ";Trusted_Connection=yes;")
         else:                     
-            con = dr.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=" + data_set_find[1] + "," + str(data_set_find[2]) + 
+            con = dr.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=" +
+                             data_set_find[1] + "," + str(data_set_find[2]) + 
                             ";DATABASE=" + data_set_find[3] + 
-                            ";UID=" + data_set_find[4] + ";PWD=" + data_set_find[5] + ";Encrypt=" + data_set_find[11] + ";")        
+                            ";UID=" + data_set_find[4] + ";PWD=" + data_set_find[5] + 
+                            ";Encrypt=" + data_set_find[11] + ";")        
     elif data_set_find[10].lower() == "pymssql":        
         con = dr2.connect(host=data_set_find[1],
                           user=data_set_find[4],
@@ -31,8 +34,9 @@ def add_db(data_db = [], curr_code = '', data_set_find = (), type_db = ''):
             for mas in data_db:
                 params = (mas[0].strftime("%Y-%m-%d"), curr_code, mas[1])   
                 if data_set_find[10].lower() == "pyodbc":                      
-                    cursor.execute("{CALL " + data_set_find[6] + "." + data_set_find[7] + "(?, ?, ?) }", params)
-                elif data_set_find[10].lower() == "pymssql":                                                
+                    cursor.execute("{CALL " + data_set_find[6] + "." + data_set_find[7] 
+                                   + "(?, ?, ?) }", params)
+                elif data_set_find[10].lower() == "pymssql": 
                     cursor.callproc(data_set_find[6] + "." + data_set_find[7], params)
             con.commit()
     except Exception as err:

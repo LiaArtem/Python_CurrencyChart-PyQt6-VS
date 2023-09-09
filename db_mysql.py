@@ -18,7 +18,8 @@ def add_db(data_db = [], curr_code = '', data_set_find = (), type_db = ''):
             # insert data
             for mas in data_db:
                 params = (mas[0], curr_code, mas[1])                        
-                cursor.execute("CALL " + data_set_find[6] + "." + data_set_find[7] + "(%s, %s, %s)", params)
+                cursor.execute("CALL " + data_set_find[6] + "." + data_set_find[7] 
+                               + "(%s, %s, %s)", params)
             con.commit()
     except Exception as err:
         print(type_db + ': ' + re.sub("^\s+|\n|\r|\s+$", '', str(err)))
