@@ -14,7 +14,6 @@ IDE - Visual Studio Code
 У командному рядку терміналу CMD
 2) Додаємо бібліотеки
 -> pip install PyQt6
--> pip install pyqt6-tools
 -> pip install python-dateutil
 -> pip install matplotlib
 -> pip install reportlab
@@ -25,15 +24,20 @@ IDE - Visual Studio Code
 -> pip install oracledb (Oracle)
 -> pip install pyodbc (MSSQL)
 -> pip install pymssql (MSSQL)
--> pip install ibm_db (IBM DB2)
+-> pip install ibm_db (IBM DB2) max python 3.11
 -> pip install fdb (Firebird) + для Windows установить Firebird Client Library (https://firebirdsql.org/en/firebird-4-0/)
 -> pip install pymongo (MongoDB)
 -> pip install cassandra-driver (Cassandra)
+-> pip install pyasyncore (Cassandra)
 
 
 3) Qt Designer
-Запускаємо -> pyqt6-tools designer або окремо встановлюємо
-   https://build-system.fman.io/qt-designer-download
+Окремо встановлюємо:
+-> https://build-system.fman.io/qt-designer-download
+або:
+-> pip install pyqt6-tools
+   Запускаємо -> pyqt6-tools designer
+
 
 4) Перетворення *.ui файлу у файл типу *.py
 -> На файлі MainWindow.ui - права клавіша миші - Compile Qt UI File (uic)
