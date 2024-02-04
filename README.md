@@ -13,22 +13,22 @@ IDE - Visual Studio Code
 
 У командному рядку терміналу CMD
 2) Додаємо бібліотеки
--> pip install PyQt6
--> pip install python-dateutil
--> pip install matplotlib
--> pip install reportlab
+-> pip install PyQt6 --upgrade
+-> pip install python-dateutil --upgrade
+-> pip install matplotlib --upgrade
+-> pip install reportlab --upgrade
 
--> pip install psycopg2 (PostgreSQL)
--> pip install mysql-connector-python (MySQL)
--> pip install mariadb (MariaDB)
--> pip install oracledb (Oracle)
--> pip install pyodbc (MSSQL)
--> pip install pymssql (MSSQL)
--> pip install ibm_db (IBM DB2) max python 3.11
--> pip install fdb (Firebird) + для Windows установить Firebird Client Library (https://firebirdsql.org/en/firebird-4-0/)
--> pip install pymongo (MongoDB)
--> pip install cassandra-driver (Cassandra)
--> pip install pyasyncore (Cassandra)
+-> pip install psycopg2 --upgrade (PostgreSQL)
+-> pip install mysql-connector-python --upgrade (MySQL)
+-> pip install mariadb --upgrade (MariaDB)
+-> pip install oracledb --upgrade (Oracle)
+-> pip install pyodbc --upgrade (MSSQL)
+-> pip install pymssql --upgrade (MSSQL)
+-> pip install ibm_db --upgrade (IBM DB2) max python 3.11
+-> pip install fdb --upgrade (Firebird) + для Windows установить Firebird Client Library (https://firebirdsql.org/en/firebird-4-0/)
+-> pip install pymongo --upgrade (MongoDB)
+-> pip install cassandra-driver --upgrade (Cassandra)
+-> pip install pyasyncore --upgrade (Cassandra)
 
 
 3) Qt Designer
