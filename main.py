@@ -21,7 +21,6 @@ import db_mysql as db_mysql
 import db_mariadb as db_mariadb
 import db_oracle as db_oracle
 import db_mssql as db_mssql
-# import db_ibmdb2 as db_ibmdb2 - max python 3.11
 import db_firebird as db_firebird
 import db_mongodb as db_mongodb
 import db_cassandra as db_cassandra
@@ -143,16 +142,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         is_enable = self.data_set_find[0]
         if is_enable:
             db_mssql.add_db(self.data_db, curr_code, self.data_set_find, type_db)
-        #############
-        # ibmdb2
-        type_db = "IBM DB2"
-        self.find_settings(type_db)
-        is_enable = self.data_set_find[0]
-        if is_enable:
-            # max python 3.11
-            # db_ibmdb2.add_db(self.data_db, curr_code, self.data_set_find, type_db) 
-            Error_MessageBox_Window(
-                        text_error="Max versions Python 3.11").show()                                
         #############
         # firebird
         type_db = "Firebird"
@@ -435,12 +424,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 case "AzureSQL":
                     self_report = db_mssql.load_data_report(
                         self.data_set_find, type_db)
-                case "IBM DB2":
-                    # max python 3.11
-                    #self_report = db_ibmdb2.load_data_report(
-                    #    self.data_set_find, type_db)                    
-                    Error_MessageBox_Window(
-                        text_error="Max versions Python 3.11").show()                    
                 case "Firebird":
                     self_report = db_firebird.load_data_report(
                         self.data_set_find, type_db)
