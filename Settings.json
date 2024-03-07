@@ -93,17 +93,6 @@
          "Encrypt": "yes",
          "IsEnable": false
          },
-    "ConnectionIBM DB2": {
-         "DBHost": "localhost",
-         "DBPort": 50000,
-         "DBName": "SAMPLE",
-         "DBUser": "DB2INST1",
-         "DBPassword": "!Aa112233",
-         "DBSchema": "test_schemas",
-         "DBInsertProcedure": "INSERT_KURS",
-         "DBSelectView": "CURS_REPORT",
-         "IsEnable": false
-         },
     "ConnectionFirebird": {
          "DBHost": "localhost",
          "DBPort": 3050,
